@@ -11,6 +11,3 @@ class GamePlay:
     
 
 
-g = GamePlay()
-print()
-print(g.possibleMoves)

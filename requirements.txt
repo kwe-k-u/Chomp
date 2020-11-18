@@ -11,7 +11,9 @@ class gameplay():
     #contructor
     init possibleMoves[]
     init rows and columns
-    fuse gui """This is where the drawing happens""" ###Matrix
+    fuse gui """This is where the drawing happens"""
+    displayMoves -> display the number of moves with which the player/computer won
+    ###Matrix
     #functions
     firstPlayer
     playAgain
