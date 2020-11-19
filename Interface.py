@@ -4,6 +4,9 @@ class Interface:
     def __init__(self):
         self.userName = ""
         self.layout = []
+        self.image_head = './head.png'
+        self.image_tail = './coin.png'
+        sg.theme("DarkAmber")
 
     @staticmethod
     def loading():
@@ -32,4 +35,3 @@ class Interface:
                 matrixCols.append(sg.Button(str((i+1, j+1))))
             self.layout.append(matrixCols)
         return self.layout
-

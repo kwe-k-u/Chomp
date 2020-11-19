@@ -1,5 +1,7 @@
 from Interface import Interface
 import PySimpleGUI as sg
+import random
+
 class GamePlay(Interface):
     def __init__(self, rows=5, columns=5):
         super().__init__()
@@ -41,3 +43,20 @@ class GamePlay(Interface):
             self.layout.append(matrixCols)
         return self.layout
 
+    def playFirst(self):
+        toss_layout = [[sg.ReadFormButton('HEAD', button_color=sg.TRANSPARENT_BUTTON,
+                            image_filename=self.image_head, auto_size_button=True, border_width=0),
+                        sg.Text(' ' * 2),
+                        sg.ReadFormButton('TAIL', button_color=sg.TRANSPARENT_BUTTON,
+                            image_filename=self.image_tail, auto_size_button=True, image_subsample=2, border_width=0)]]
+        win = sg.Window("MAKE A TOSS", toss_layout, background_color="White")
+        e, v = win.read()
+        win.close()
+        toss = random.choice([1, 0])
+        print(toss)
+        if eval(e) == toss:
+            self.loading()
+            sg.popup_no_titlebar("YOU WON THE TOSS, YOU PLAY FIRST")
+        else:
+            self.loading()
+            sg.popup_no_titlebar("YOU LOST THE TOSS, COMPUTER PLAYS FIRST")
