@@ -39,17 +39,16 @@ class GamePlay(Interface):
         for i in range(len(self.possibleMoves)):
             matrixCols = []
             for j in range(len(self.possibleMoves[i])):
-                matrixCols.append(sg.Button(str((i + 1, j + 1))))
+                matrixCols.append(sg.Button("", image_filename=self.image_cookie, key=str((i+1, j+1)), image_size=(50, 50)))
             self.layout.append(matrixCols)
         return self.layout
 
     def playFirst(self):
-        toss_layout = [[sg.ReadFormButton('HEAD', button_color=sg.TRANSPARENT_BUTTON,
-                            image_filename=self.image_head, auto_size_button=True, border_width=0),
+        toss_layout = [[sg.Text("CHOOSE A EITHER OF THE TWO BELOW TO MAKE A TOSS", text_color="Yellow")],
+                       [sg.Button('HEAD', size=(20, 10), key='1'),
                         sg.Text(' ' * 2),
-                        sg.ReadFormButton('TAIL', button_color=sg.TRANSPARENT_BUTTON,
-                            image_filename=self.image_tail, auto_size_button=True, image_subsample=2, border_width=0)]]
-        win = sg.Window("MAKE A TOSS", toss_layout, background_color="White")
+                        sg.Button('TAIL', size=(20, 10), key='0')]]
+        win = sg.Window("MAKE A TOSS", toss_layout)
         e, v = win.read()
         win.close()
         toss = random.choice([1, 0])
