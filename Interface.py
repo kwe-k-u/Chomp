@@ -4,6 +4,9 @@ class Interface:
     def __init__(self):
         self.userName = ""
         self.layout = []
+        self.image_cookie = './cookieHead.png'
+        self.image_coin = './coin.png'
+        sg.theme("DarkAmber")
 
     @staticmethod
     def loading():
@@ -16,9 +19,6 @@ class Interface:
         decision = sg.popup_yes_no("Want to play again?", grab_anywhere=True)
         return "Yes" == decision
 
-    def userDetails(self):
-        self.userName = sg.popup_get_text("Hello player, what's your name?", grab_anywhere=True)
-
     @staticmethod
     def gameSetup():
         r = sg.popup_get_text("How many rows of cookies do you want?")
@@ -29,7 +29,6 @@ class Interface:
         for i in range(rows):
             matrixCols = []
             for j in range(col):
-                matrixCols.append(sg.Button(str((i+1, j+1))))
+                matrixCols.append(sg.Button("", image_filename=self.image_cookie, key=str((i+1, j+1)), image_size=(50, 50)))
             self.layout.append(matrixCols)
         return self.layout
-
