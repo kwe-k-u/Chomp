@@ -18,6 +18,7 @@ while eval(event) != (1, 1):
     setupWin.close()
 
 d = chp.playAgain()
+
 while d:
     g = gp.GamePlay()
     g.loading()
@@ -34,4 +35,5 @@ while d:
         setupWin = sg.Window("CHOMP", chp.updateBoard())
         event, value = setupWin.read()
         setupWin.close()
+
     d = chp.playAgain()

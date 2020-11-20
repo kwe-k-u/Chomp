@@ -7,6 +7,7 @@ class GamePlay(Interface):
         super().__init__()
         self.rows, self.columns = rows, columns
         self.possibleMoves = []
+
         #Gameboard
         for i in range(self.rows):
             print()
