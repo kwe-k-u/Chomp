@@ -25,6 +25,7 @@ while d:
     board = g.gameSetup()
     g.playFirst()
     chp = gp.GamePlay(int(board[0]), int(board[1]))
+    # setupWin = sg.Window("CHOMP " + g.currentPlayer.getName(), chp.gameBoard(int(board[0]), int(board[1])))
     setupWin = sg.Window("CHOMP", chp.gameBoard(int(board[0]), int(board[1])))
     event, values = setupWin.read()
     setupWin.close()
