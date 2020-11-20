@@ -3,25 +3,38 @@ import PySimpleGUI as sg
 import random
 
 class GamePlay(Interface):
-    def __init__(self, rows=5, columns=5):
+    def __init__(self):
         super().__init__()
-        self.rows, self.columns = rows, columns
+        self.rows, self.columns = 5,5
         self.possibleMoves = []
+        self.currentPlayer = None
 
         #Player classes
         # player = Human()
         # computer = Computer()
-        self.currentPlayer = None
 
+        if self.currentPlayer is None:
+            self.playFirst()
+
+
+
+
+    #Asks user for information about the size of the board
+    def gameSetup(self):
+        r = sg.popup_get_text("How many rows of cookies do you want?")
+        c = sg.popup_get_text("How many columns of cookies do you want?")
+        self.columns = c
+        self.rows = r
 
         #Places cookies on to the game board
-        for i in range(self.rows): # rows or bard
+        for i in range(eval(self.rows)): # rows or bard
             print()
             matrixCols = []
-            for j in range(self.columns): #columns of board
+            for j in range(eval(self.columns)): #columns of board
                 #print("# ", end="")
                 matrixCols.append((i + 1, j + 1))
             self.possibleMoves.append(matrixCols)
+
 
     #Gets the cookies that have not been removed from the board by a player action (Clickable cookies)
     def getPlay(self, choice):
@@ -36,19 +49,6 @@ class GamePlay(Interface):
                 if tup in self.possibleMoves[i]:
                     self.possibleMoves[i].remove(tup) #remove cookie from board
 
-    #Update the changes made to the board
-    def updateBoard(self):
-        self.layout = [[sg.Text("Player score: 10"), sg.Text("Computer Score: 39")],
-                       [sg.Text("Game Number: 5")]]
-        for i in range(len(self.possibleMoves)):
-            matrixCols = []
-            for j in range(len(self.possibleMoves[i])):
-                #draw cookies to the screen
-                matrixCols.append(sg.Button("", image_filename=self.image_cookie, key=str((i+1, j+1)), image_size=(50, 50)))
-            self.layout.append(matrixCols)
-        return self.layout
-
-    #Determines which player plays first using a coin flip
     def playFirst(self):
         toss_layout = [[sg.Text("CHOOSE A EITHER OF THE TWO BELOW TO MAKE A TOSS", text_color="Yellow")],
                        [sg.Button('HEAD', size=(20, 10), key='1'),
@@ -70,3 +70,32 @@ class GamePlay(Interface):
             self.loading()
             # self.currentPlayer = computer
             sg.popup_no_titlebar("YOU LOST THE TOSS, COMPUTER PLAYS FIRST")
+
+
+    # def reset(self):
+    #     self.rows, self.columns = 5,5
+    #     self.possibleMoves = []
+    #     self.currentPlayer = None
+    #
+
+
+
+    # def __init__(self, rows=5, columns=5):
+    #     super().__init__()
+    #     self.rows, self.columns = rows, columns
+    #     self.possibleMoves = []
+    #
+    #     #Player classes
+    #     # player = Human()
+    #     # computer = Computer()
+    #     self.currentPlayer = None
+    #
+    #
+    #     #Places cookies on to the game board
+    #     for i in range(self.rows): # rows or bard
+    #         print()
+    #         matrixCols = []
+    #         for j in range(self.columns): #columns of board
+    #             #print("# ", end="")
+    #             matrixCols.append((i + 1, j + 1))
+    #         self.possibleMoves.append(matrixCols)
