@@ -1,7 +1,10 @@
 from Human import Human
 import random
+from Gameplay import GamePlay
 
 class Computer(Human):
+
+    gamePlay = GamePlay
 
     def __init__(self):
         self.name = "AI"
@@ -17,4 +20,5 @@ class Computer(Human):
             else:
                 valid_move = True
         return row_move, column_move
+
 
