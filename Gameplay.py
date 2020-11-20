@@ -5,9 +5,11 @@ import random
 class GamePlay(Interface):
     def __init__(self):
         super().__init__()
-        self.rows, self.columns = 5,5
-        self.possibleMoves = []
-        self.currentPlayer = None
+        # self.rows, self.columns = 5,5
+        # self.possibleMoves = []
+        # self.currentPlayer = None
+        # self.removeIds = []
+        self.reset()
 
         #Player classes
         # player = Human()
@@ -21,6 +23,7 @@ class GamePlay(Interface):
 
     #Asks user for information about the size of the board
     def gameSetup(self):
+        self.reset()
         r = sg.popup_get_text("How many rows of cookies do you want?")
         c = sg.popup_get_text("How many columns of cookies do you want?")
         self.columns = c
@@ -38,13 +41,13 @@ class GamePlay(Interface):
 
     #Gets the cookies that have not been removed from the board by a player action (Clickable cookies)
     def getPlay(self, choice):
-        removeIds = [] #Cookies that will be removed from the board
+        self.removeIds = [] #Cookies that will be removed from the board
         for row in self.possibleMoves:
             for pair in row:
                 if pair[0] >= choice[0] and pair[1] >= choice[1]: #Checking if cookie is to the right and below clicked cookie
-                    removeIds.append(pair)
+                    self.removeIds.append(pair)
 
-        for tup in removeIds:
+        for tup in self.removeIds:
             for i in range(len(self.possibleMoves)):
                 if tup in self.possibleMoves[i]:
                     self.possibleMoves[i].remove(tup) #remove cookie from board
@@ -71,6 +74,12 @@ class GamePlay(Interface):
             # self.currentPlayer = computer
             sg.popup_no_titlebar("YOU LOST THE TOSS, COMPUTER PLAYS FIRST")
 
+
+    def reset(self):
+        self.possibleMoves = []
+        self.currentPlayer = None
+        self.columns, self.columns = 5,5
+        self.removeIds = []
 
     # def reset(self):
     #     self.rows, self.columns = 5,5

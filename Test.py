@@ -16,7 +16,6 @@ while eval(event) != (1, 1):
     setupWin.close()
 
 d = g.playAgain()
-g.updateBoard()
 
 while d:
     g.loading()
@@ -33,4 +32,3 @@ while d:
         setupWin.close()
 
     d = g.playAgain()
-    g.updateBoard()
