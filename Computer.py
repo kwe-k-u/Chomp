@@ -1,20 +1,20 @@
 from Human import Human
-
+import random
 
 class Computer(Human):
 
     def __init__(self):
         self.name = "AI"
 
+    def checkMoves(self, gamePlay):
 
-    def checkMoves(self):
-        #TODO work on this
-        pass
-    #return moves
+        valid_move = False
+        while not valid_move:
+            row_move = random.randint(0, gamePlay.rows - 1)
+            column_move = random.randint(0, gamePlay.columns - 1)
+            if gamePlay.possibleMoves[row_move][column_move] == " ":
+                continue
+            else:
+                valid_move = True
+        return row_move, column_move
 
-    def makeMove(self):
-        pass
-        m = self.checkMoves()
-        #TODO work on this
-        someIndex = 0
-        self.makeMove(m[someIndex])
