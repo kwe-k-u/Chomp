@@ -5,10 +5,6 @@ import random
 class GamePlay(Interface):
     def __init__(self):
         super().__init__()
-        # self.rows, self.columns = 5,5
-        # self.possibleMoves = []
-        # self.currentPlayer = None
-        # self.removeIds = []
         self.reset()
 
         #Player classes
@@ -34,7 +30,6 @@ class GamePlay(Interface):
             print()
             matrixCols = []
             for j in range(eval(self.columns)): #columns of board
-                #print("# ", end="")
                 matrixCols.append((i + 1, j + 1))
             self.possibleMoves.append(matrixCols)
 
@@ -47,11 +42,12 @@ class GamePlay(Interface):
                 if pair[0] >= choice[0] and pair[1] >= choice[1]: #Checking if cookie is to the right and below clicked cookie
                     self.removeIds.append(pair)
 
-        for tup in self.removeIds:
+        for tup in self.removeIds: #Reoving that users cut off
             for i in range(len(self.possibleMoves)):
                 if tup in self.possibleMoves[i]:
                     self.possibleMoves[i].remove(tup) #remove cookie from board
 
+    #Determines who begins the game
     def playFirst(self):
         toss_layout = [[sg.Text("CHOOSE A EITHER OF THE TWO BELOW TO MAKE A TOSS", text_color="Yellow")],
                        [sg.Button('HEAD', size=(20, 10), key='1'),
@@ -75,36 +71,9 @@ class GamePlay(Interface):
             sg.popup_no_titlebar("YOU LOST THE TOSS, COMPUTER PLAYS FIRST")
 
 
+    #Resets the value of all class attributes to their defaults
     def reset(self):
         self.possibleMoves = []
         self.currentPlayer = None
         self.columns, self.columns = 5,5
         self.removeIds = []
-
-    # def reset(self):
-    #     self.rows, self.columns = 5,5
-    #     self.possibleMoves = []
-    #     self.currentPlayer = None
-    #
-
-
-
-    # def __init__(self, rows=5, columns=5):
-    #     super().__init__()
-    #     self.rows, self.columns = rows, columns
-    #     self.possibleMoves = []
-    #
-    #     #Player classes
-    #     # player = Human()
-    #     # computer = Computer()
-    #     self.currentPlayer = None
-    #
-    #
-    #     #Places cookies on to the game board
-    #     for i in range(self.rows): # rows or bard
-    #         print()
-    #         matrixCols = []
-    #         for j in range(self.columns): #columns of board
-    #             #print("# ", end="")
-    #             matrixCols.append((i + 1, j + 1))
-    #         self.possibleMoves.append(matrixCols)
