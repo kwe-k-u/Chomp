@@ -38,7 +38,8 @@ class GamePlay(Interface):
 
     #Update the changes made to the board
     def updateBoard(self):
-        self.layout = []
+        self.layout = [[sg.Text("Player score: 10"), sg.Text("Computer Score: 39")],
+                       [sg.Text("Game Number: 5")]]
         for i in range(len(self.possibleMoves)):
             matrixCols = []
             for j in range(len(self.possibleMoves[i])):
