@@ -3,46 +3,51 @@ import PySimpleGUI as sg
 import random
 
 class GamePlay(Interface):
-    def __init__(self, rows=5, columns=5):
+    def __init__(self):
         super().__init__()
-        self.rows, self.columns = rows, columns
-        self.possibleMoves = []
-        #Gameboard
-        for i in range(self.rows):
+        self.reset()
+
+        #Player classes
+        # player = Human()
+        # computer = Computer()
+
+        if self.currentPlayer is None:
+            self.playFirst()
+
+
+
+
+    #Asks user for information about the size of the board
+    def gameSetup(self):
+        self.reset()
+        r = sg.popup_get_text("How many rows of cookies do you want?")
+        c = sg.popup_get_text("How many columns of cookies do you want?")
+        self.columns = c
+        self.rows = r
+
+        #Places cookies on to the game board
+        for i in range(eval(self.rows)): # rows or bard
             print()
             matrixCols = []
-            for j in range(self.columns):
-                #print("# ", end="")
+            for j in range(eval(self.columns)): #columns of board
                 matrixCols.append((i + 1, j + 1))
             self.possibleMoves.append(matrixCols)
 
+
+    #Gets the cookies that have not been removed from the board by a player action (Clickable cookies)
     def getPlay(self, choice):
-        removeIds = []
+        self.removeIds = [] #Cookies that will be removed from the board
         for row in self.possibleMoves:
             for pair in row:
-                if pair[0] >= choice[0] and pair[1] >= choice[1]:
-                    removeIds.append(pair)
+                if pair[0] >= choice[0] and pair[1] >= choice[1]: #Checking if cookie is to the right and below clicked cookie
+                    self.removeIds.append(pair)
 
-        for tup in removeIds:
+        for tup in self.removeIds: #Reoving that users cut off
             for i in range(len(self.possibleMoves)):
                 if tup in self.possibleMoves[i]:
-                    self.possibleMoves[i].remove(tup)
+                    self.possibleMoves[i].remove(tup) #remove cookie from board
 
-    def updateMatrix(self):
-        for i in self.possibleMoves:
-            print()
-            for j in range(len(i)):
-                print("# ", end="")
-
-    def updateBoard(self):
-        self.layout = []
-        for i in range(len(self.possibleMoves)):
-            matrixCols = []
-            for j in range(len(self.possibleMoves[i])):
-                matrixCols.append(sg.Button("", image_filename=self.image_cookie, key=str((i+1, j+1)), image_size=(50, 50)))
-            self.layout.append(matrixCols)
-        return self.layout
-
+    #Determines who begins the game
     def playFirst(self):
         toss_layout = [[sg.Text("CHOOSE A EITHER OF THE TWO BELOW TO MAKE A TOSS", text_color="Yellow")],
                        [sg.Button('HEAD', size=(20, 10), key='1'),
@@ -51,11 +56,24 @@ class GamePlay(Interface):
         win = sg.Window("MAKE A TOSS", toss_layout)
         e, v = win.read()
         win.close()
-        toss = random.choice([1, 0])
+
+        toss = random.choice([1, 0]) #flip coin
         print(toss)
+        #If the flip matches user select, user goes first else computer
         if eval(e) == toss:
             self.loading()
+            # self.currentPlayer = player
             sg.popup_no_titlebar("YOU WON THE TOSS, YOU PLAY FIRST")
+
         else:
             self.loading()
+            # self.currentPlayer = computer
             sg.popup_no_titlebar("YOU LOST THE TOSS, COMPUTER PLAYS FIRST")
+
+
+    #Resets the value of all class attributes to their defaults
+    def reset(self):
+        self.possibleMoves = []
+        self.currentPlayer = None
+        self.columns, self.columns = 5,5
+        self.removeIds = []
