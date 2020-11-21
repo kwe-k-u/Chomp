@@ -1,12 +1,19 @@
 import PySimpleGUI as sg
 
 class Interface:
-    def __init__(self):
-        self.layout = [[sg.Text("Player score: 10"), sg.Text("Computer Score: 39")],
-                       [sg.Text("Game Number: 5")]]
+    def __init__(self, computer, human):
+        self.computer = computer
+        self.player = human
+        self.gameNumber  = 0
+        self.currentPlayer = None
+
+        self.layout = [[sg.Text("Player score: " + str(self.player.getScore())), sg.Text("Computer Score: 0")],
+                       [sg.Text("Game Number: " + str(self.gameNumber))]]
         self.image_cookie = './cookieHead.png'
         self.image_coin = './coin.png'
         sg.theme("DarkAmber")
+
+
 
     @staticmethod
     #Displays a loading indicator to the screen
@@ -24,10 +31,9 @@ class Interface:
 
     def updateBoard(self):
 
-        self.layout = [[sg.Text("Player score: 10"), sg.Text("Computer Score: 39")],
-                       [sg.Text("Game Number: 5")]]
+        self.layout = [[sg.Text("Player score: " + str(self.player.getScore())), sg.Text("Computer Score: " + str(self.computer.getScore()))],
+                       [sg.Text("Game Number: " + str(self.gameNumber))]]
         # self.gameBoard(self.possibleMoves, self.possibleMoves)
-        print(self.possibleMoves)
         for i in range(len(self.possibleMoves)):
             matrixCols = []
 
@@ -36,3 +42,17 @@ class Interface:
                 matrixCols.append(sg.Button("", image_filename=self.image_cookie, key=str((i+1, j+1)), image_size=(50, 50)))
             self.layout.append(matrixCols)
         return self.layout
+
+
+    #Changes the current player
+    def switchPlayer(self, d = "" ):
+        if self.currentPlayer is None:
+            if d == "player":
+                self.currentPlayer = self.player
+            elif d == "computer":
+                self.currentPlayer = self.computer
+
+        elif self.currentPlayer == self.computer:
+            self.currentPlayer = self.player
+        else:
+            self.currentPlayer = self.computer
