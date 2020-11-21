@@ -1,15 +1,20 @@
 from Interface import Interface
 import PySimpleGUI as sg
 import random
+from Human import Human
+from Computer import Computer
 
 class GamePlay(Interface):
     def __init__(self):
-        super().__init__()
+
+        name = sg.popup_get_text("Enter your player name: ")
+
+        super().__init__(Computer(), Human(name))
         self.reset()
 
+
         #Player classes
-        # player = Human()
-        # computer = Computer()
+        self.currentPlayer
 
         if self.currentPlayer is None:
             self.playFirst()
@@ -24,6 +29,7 @@ class GamePlay(Interface):
         c = sg.popup_get_text("How many columns of cookies do you want?")
         self.columns = c
         self.rows = r
+        self.gameNumber +=1
 
         #Places cookies on to the game board
         for i in range(eval(self.rows)): # rows or bard

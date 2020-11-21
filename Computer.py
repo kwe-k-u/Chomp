@@ -1,10 +1,10 @@
 from Human import Human
 import random
-from Gameplay import GamePlay
+# from Gameplay import GamePlay
 
 class Computer(Human):
 
-    gamePlay = GamePlay
+    # gamePlay = GamePlay
 
     def __init__(self):
         self.name = "AI"
