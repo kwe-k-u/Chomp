@@ -15,9 +15,6 @@ class GamePlay(Interface):
         if self.currentPlayer is None:
             self.playFirst()
 
-
-
-
     #Asks user for information about the size of the board
     def gameSetup(self):
         self.reset()
