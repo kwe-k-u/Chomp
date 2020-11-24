@@ -5,14 +5,21 @@ g = gp.GamePlay()
 g.loading()
 g.gameSetup()
 setupWin = sg.Window("CHOMP", g.updateBoard())
-event, values = setupWin.read()
+if g.currentPlayer.getName() != "AI":
+    event, values = setupWin.read()
+else:
+    event = g.currentPlayer.checkMoves(g)
 setupWin.close()
-
-while eval(event) != (1, 1):
+print
+while event != (1, 1):
+# while eval(event) != (1, 1):
     g.loading()
-    g.getPlay(eval(event))
+    g.getPlay(event)
     setupWin = sg.Window("CHOMP", g.updateBoard())
-    event, value = setupWin.read()
+    if g.currentPlayer.getName() != "AI":
+        event, values = setupWin.read()
+    else:
+        event = g.currentPlayer.checkMoves(g)
     setupWin.close()
 
 d = g.playAgain()
@@ -21,14 +28,21 @@ while d:
     g.loading()
     g.gameSetup()
     setupWin = sg.Window("CHOMP", g.updateBoard())
-    event, values = setupWin.read()
+    if g.currentPlayer.getName() != "AI":
+        event, values = setupWin.read()
+    else:
+        event = g.currentPlayer.checkMoves(g)
     setupWin.close()
 
-    while eval(event) != (1, 1):
+    while event != (1, 1):
         g.loading()
-        g.getPlay(eval(event))
+        g.getPlay(event)
         setupWin = sg.Window("CHOMP", g.updateBoard())
-        event, value = setupWin.read()
+
+        if g.currentPlayer.getName() != "AI":
+            event, values = setupWin.read()
+        else:
+            event = g.currentPlayer.checkMoves(g)
         setupWin.close()
 
     d = g.playAgain()

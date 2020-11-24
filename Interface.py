@@ -8,7 +8,8 @@ class Interface:
         self.currentPlayer = None
 
         self.layout = [[sg.Text("Player score: " + str(self.player.getScore())), sg.Text("Computer Score: 0")],
-                       [sg.Text("Game Number: " + str(self.gameNumber))]]
+                       [sg.Text("Game Number: " + str(self.gameNumber))],
+                       ]
         self.image_cookie = './cookieHead.png'
         self.image_coin = './coin.png'
         sg.theme("DarkAmber")
@@ -25,6 +26,7 @@ class Interface:
     # @staticmethod
     #Asks user if (s)he wants a rematch
     def playAgain(self):
+
         self.switchPlayer()
         self.currentPlayer.win()
 
@@ -35,7 +37,7 @@ class Interface:
     def updateBoard(self):
 
         self.layout = [[sg.Text("Player score: " + str(self.player.getScore())), sg.Text("Computer Score: " + str(self.computer.getScore()))],
-                       [sg.Text("Game Number: " + str(self.gameNumber))]]
+                       [sg.Text("Game Number: " + str(self.gameNumber)),sg.Text("Current Player: " + self.currentPlayer.getName() )]]
         # self.gameBoard(self.possibleMoves, self.possibleMoves)
         for i in range(len(self.possibleMoves)):
             matrixCols = []

@@ -37,11 +37,12 @@ class GamePlay(Interface):
 
     #Gets the cookies that have not been removed from the board by a player action (Clickable cookies)
     def getPlay(self, choice):
-        print(self.currentPlayer.getName())
+        if type(choice) == str:
+            choice = eval(choice)
         self.removeIds = [] #Cookies that will be removed from the board
         for row in self.possibleMoves:
             for pair in row:
-                if pair[0] >= choice[0] and pair[1] >= choice[1]: #Checking if cookie is to the right and below clicked cookie
+                if (int(pair[0]) >= int(choice[0]) and int(pair[1]) >= int(choice[1])): #Checking if cookie is to the right and below clicked cookie
                     self.removeIds.append(pair)
 
         for tup in self.removeIds: #Reoving that users cut off
