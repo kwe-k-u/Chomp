@@ -13,3 +13,8 @@ class Human:
         self.numMoves +=1
         pass
 
+    def win(self):
+        self.score +=1
+
+    def getScore(self):
+       return self.score

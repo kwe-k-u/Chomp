@@ -1,24 +1,18 @@
 from Human import Human
 import random
-from Gameplay import GamePlay
+# from Gameplay import GamePlay
 
 class Computer(Human):
 
-    gamePlay = GamePlay
+    # gamePlay = GamePlay
 
     def __init__(self):
         self.name = "AI"
 
     def checkMoves(self, gamePlay):
-
-        valid_move = False
-        while not valid_move:
-            row_move = random.randint(0, gamePlay.rows - 1)
-            column_move = random.randint(0, gamePlay.columns - 1)
-            if gamePlay.possibleMoves[row_move][column_move] == " ":
-                continue
-            else:
-                valid_move = True
-        return row_move, column_move
-
-
+        #Select a random row from possible moves. Then select a random cookie from that row
+        try:
+            choice = random.choice(random.choice(gamePlay.possibleMoves))
+        except: #Repeat process if an error occurs. (repetition of error is unlikely
+            choice = random.choice(random.choice(gamePlay.possibleMoves))
+        return (choice[0],choice[1])
