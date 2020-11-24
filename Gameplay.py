@@ -12,11 +12,7 @@ class GamePlay(Interface):
         super(GamePlay, self).__init__(Computer(), Human(name))
         self.reset()
 
-
-        #Player classes
-
         if self.currentPlayer is None:
-            # currentPlayer
             self.playFirst()
 
 

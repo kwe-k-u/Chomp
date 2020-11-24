@@ -15,16 +15,19 @@ class Interface:
 
 
 
-    @staticmethod
+    # @staticmethod
     #Displays a loading indicator to the screen
-    def loading():
+    def loading(self):
         for i in range(100000):
             sg.popup_animated(sg.DEFAULT_BASE64_LOADING_GIF, background_color="White", time_between_frames=100)
         sg.popup_animated(None)
 
-    @staticmethod
+    # @staticmethod
     #Asks user if (s)he wants a rematch
-    def playAgain():
+    def playAgain(self):
+        self.switchPlayer()
+        self.currentPlayer.win()
+
         decision = sg.popup_yes_no("Want to play again?", grab_anywhere=True)
 
         return "Yes" == decision
