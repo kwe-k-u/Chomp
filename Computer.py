@@ -11,9 +11,10 @@ class Computer(Human):
 
     def checkMoves(self, gamePlay):
         #Select a random row from possible moves. Then select a random cookie from that row
-        try:
-            choice = random.choice(random.choice(gamePlay.possibleMoves))
-        except: #Repeat process if an error occurs. (repetition of error is unlikely
-            choice = random.choice(random.choice(gamePlay.possibleMoves))
+        #removing the null arrays
+        if (gamePlay.possibleMoves.count([]) != 0):
+            moves = gamePlay.possibleMoves[: -gamePlay.possibleMoves.count([])]
+        else:
+            moves = gamePlay.possibleMoves
+        choice = random.choice(random.choice(moves))
         return (choice[0],choice[1])
-
