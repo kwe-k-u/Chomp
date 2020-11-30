@@ -3,6 +3,16 @@ import Gameplay as gp
 import pygame
 from pygame import mixer
 
+
+def playerTurn():
+        if g.currentPlayer.getName() != "AI":
+            event, values = setupWin.read()
+        else:
+            event, values = setupWin.read(timeout =900)
+            event = g.currentPlayer.checkMoves(g)
+        setupWin.close()
+        return event, values
+
 pygame.init()
 
 g = gp.GamePlay()
@@ -12,52 +22,29 @@ mixer.music.play(-1)
 
 g.gameSetup()
 setupWin = sg.Window("CHOMP", g.updateBoard())
-if g.currentPlayer.getName() != "AI":
-    event, values = setupWin.read()
-else:
-    event, values = setupWin.read(timeout =1200)
-    event = g.currentPlayer.checkMoves(g)
-setupWin.close()
-print
+event, value = playerTurn()
+
 while event != (1, 1):
-# while eval(event) != (1, 1):
     g.loading()
     g.getPlay(event)
     setupWin = sg.Window("CHOMP", g.updateBoard())
-    if g.currentPlayer.getName() != "AI":
-        event, values = setupWin.read()
-        mixer_sound = mixer.Sound('laser.wav')
-        mixer_sound.play()
-    else:
-        event, values = setupWin.read(timeout =1200)
-        event = g.currentPlayer.checkMoves(g)
-        mixer_sound = mixer.Sound('laser.wav')
-        mixer_sound.play()
-    setupWin.close()
+    event, value = playerTurn()
 
 d = g.playAgain()
 
-while d:
+while d and event != (1,1):
     g.loading()
     g.gameSetup()
     setupWin = sg.Window("CHOMP", g.updateBoard())
-    if g.currentPlayer.getName() != "AI":
-        event, values = setupWin.read()
-    else:
-        event, values = setupWin.read(timeout =1200)
-        event = g.currentPlayer.checkMoves(g)
-    setupWin.close()
+    event, value = playerTurn()
 
     while event != (1, 1):
         g.loading()
         g.getPlay(event)
         setupWin = sg.Window("CHOMP", g.updateBoard())
 
-        if g.currentPlayer.getName() != "AI":
-            event, values = setupWin.read()
-        else:
-            event, values = setupWin.read(timeout =1200)
-            event = g.currentPlayer.checkMoves(g)
-        setupWin.close()
+        event, value = playerTurn()
 
     d = g.playAgain()
+
+

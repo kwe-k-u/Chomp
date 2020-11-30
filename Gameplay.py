@@ -39,7 +39,7 @@ class GamePlay(Interface):
         self.removeIds = [] #Cookies that will be removed from the board
         for row in self.possibleMoves:
             for pair in row:
-                if (int(pair[0]) >= int(choice[0]) and int(pair[1]) >= int(choice[1])): #Checking if cookie is to the right and below clicked cookie
+                if int(pair[0]) >= int(choice[0]) and int(pair[1]) >= int(choice[1]): #Checking if cookie is to the right and below clicked cookie
                     self.removeIds.append(pair)
 
         for tup in self.removeIds: #Reoving that users cut off

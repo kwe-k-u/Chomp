@@ -30,7 +30,7 @@ class Interface:
         self.switchPlayer()
         self.currentPlayer.win()
 
-        decision = sg.popup_yes_no("Want to play again?", grab_anywhere=True)
+        decision = sg.popup_yes_no(self.player.getName() + " Won the game!!\nWant to play again?", grab_anywhere=True)
 
         return "Yes" == decision
 
