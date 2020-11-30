@@ -15,6 +15,7 @@ setupWin = sg.Window("CHOMP", g.updateBoard())
 if g.currentPlayer.getName() != "AI":
     event, values = setupWin.read()
 else:
+    event, values = setupWin.read(timeout =1200)
     event = g.currentPlayer.checkMoves(g)
 setupWin.close()
 print
@@ -28,9 +29,10 @@ while event != (1, 1):
         mixer_sound = mixer.Sound('laser.wav')
         mixer_sound.play()
     else:
+        event, values = setupWin.read(timeout =1200)
+        event = g.currentPlayer.checkMoves(g)
         mixer_sound = mixer.Sound('laser.wav')
         mixer_sound.play()
-        event = g.currentPlayer.checkMoves(g)
     setupWin.close()
 
 d = g.playAgain()
@@ -42,6 +44,7 @@ while d:
     if g.currentPlayer.getName() != "AI":
         event, values = setupWin.read()
     else:
+        event, values = setupWin.read(timeout =1200)
         event = g.currentPlayer.checkMoves(g)
     setupWin.close()
 
@@ -53,6 +56,7 @@ while d:
         if g.currentPlayer.getName() != "AI":
             event, values = setupWin.read()
         else:
+            event, values = setupWin.read(timeout =1200)
             event = g.currentPlayer.checkMoves(g)
         setupWin.close()
 
